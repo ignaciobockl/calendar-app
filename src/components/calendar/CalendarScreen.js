@@ -5,6 +5,7 @@ import moment from 'moment';
 import { Navbar } from '../ui/Navbar';
 
 import { CalendarEvent } from './CalendarEvent';
+import { CalendarModal } from './CalendarModal';
 
 import { messages } from '../../helpers/calendar-messages-es';
 
@@ -79,6 +80,8 @@ export const CalendarScreen = () => {
           onView={ onViewChange }
           view={ lastView }
         />
+
+        <CalendarModal />
 
     </div>
   )
