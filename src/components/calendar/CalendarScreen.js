@@ -5,11 +5,13 @@ import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 
 import { Navbar } from '../ui/Navbar';
+import { AddNewFab } from '../ui/AddNewFab';
 
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 
 import { uiOpenModal } from '../../actions/ui';
+import { eventSetActive } from '../../actions/events';
 
 import { messages } from '../../helpers/calendar-messages-es';
 
@@ -31,6 +33,7 @@ const myEventsList = [{
   }
 }];
 
+
 export const CalendarScreen = () => {
 
   const dispatch = useDispatch();
@@ -42,7 +45,8 @@ export const CalendarScreen = () => {
   }
 
   const onSelectEvent = (e) => {
-    console.log(e)
+    dispatch( eventSetActive(e) );
+    dispatch( uiOpenModal() );
   }
 
   const onViewChange = (e) => {
@@ -86,6 +90,8 @@ export const CalendarScreen = () => {
           onView={ onViewChange }
           view={ lastView }
         />
+
+        <AddNewFab />
 
         <CalendarModal />
 
