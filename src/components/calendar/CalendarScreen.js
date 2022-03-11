@@ -11,7 +11,7 @@ import { Navbar } from '../ui/Navbar';
 import { CalendarEvent } from './CalendarEvent';
 import { CalendarModal } from './CalendarModal';
 
-import { eventSetActive } from '../../actions/events';
+import { eventClearActiveEvent, eventSetActive } from '../../actions/events';
 import { uiOpenModal } from '../../actions/ui';
 
 import { messages } from '../../helpers/calendar-messages-es';
@@ -43,6 +43,10 @@ export const CalendarScreen = () => {
   const onViewChange = (e) => {
     setLastView(e);
     localStorage.setItem('lastView', e);
+  }
+
+  const onSelectSlot = (e) => {
+    dispatch( eventClearActiveEvent() );
   }
 
   const eventStyleGetter = ( event, start, end, isSelected ) => {
@@ -78,6 +82,8 @@ export const CalendarScreen = () => {
           }}
           onDoubleClickEvent={ onDobleClick }
           onSelectEvent={ onSelectEvent }
+          onSelectSlot={ onSelectSlot }
+          selectable={ true }
           onView={ onViewChange }
           view={ lastView }
         />
