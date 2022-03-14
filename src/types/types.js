@@ -2,7 +2,6 @@
 
 export const types = {
 
-    authChecking: '[auth] Checking login state',
     authCheckingFinish: '[auth] Finish checking login state',
     authLogin: '[auth] Start login',
     authStartRegister: '[auth] Start register',

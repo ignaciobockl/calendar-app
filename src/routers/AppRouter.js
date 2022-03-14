@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
     BrowserRouter as Router,
     Switch,
@@ -9,9 +10,20 @@ import {
 
 import { CalendarScreen } from '../components/calendar/CalendarScreen';
 import { LoginScreen } from '../components/auth/LoginScreen';
+import { startChecking } from '../actions/auth';
+
 
 
 export const AppRouter = () => {
+  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    dispatch( startChecking() );
+
+  }, [ dispatch ]);
+  
   return (
     <Router>
         <div>
