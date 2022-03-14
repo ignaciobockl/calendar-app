@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 import { fetchWithoutToken } from "../helpers/fetch"
 
 import { types } from "../types/types";
@@ -18,6 +20,9 @@ export const startLogin = ( email, password ) => {
                 uid: body.uid,
                 name: body.name
             }));
+        } else {
+            body.msg = 'The username and/or password are incorrect.'
+            Swal.fire('Error', body.msg, 'error');
         }
 
     }
