@@ -15,6 +15,10 @@ const login = ( user ) => ({
     payload: user
 });
 
+const logout = () => ({
+    type: types.authLogout
+});
+
 export const startChecking = () => {
     return async( dispatch ) => {
 
@@ -58,6 +62,16 @@ export const startLogin = ( email, password ) => {
             body.msg = 'The username and/or password are incorrect.'
             Swal.fire('Error', body.msg, 'error');
         }
+
+    }
+}
+
+export const startLogout = () => {
+    return ( dispatch ) => {
+
+        localStorage.clear();
+
+        dispatch( logout() );
 
     }
 }
