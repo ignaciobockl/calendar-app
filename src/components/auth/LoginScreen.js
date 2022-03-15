@@ -15,17 +15,17 @@ export const LoginScreen = () => {
     const dispatch = useDispatch();
 
     const [ formLoginValues, handleLoginInputChange ] = useForm({
-        lEmail: 'nachotta@gmail.com',
-        lPassword: '132456'
+        lEmail: '',
+        lPassword: ''
     });
 
     const { lEmail, lPassword } = formLoginValues;
 
     const [ formRegisterValues, handleRegisterInputChange ] = useForm({
-        rName: 'Mailen',
-        rEmail: 'mailen@gmail.com',
-        rPassword1: '132456',
-        rPassword2: '132456'
+        rName: '',
+        rEmail: '',
+        rPassword1: '',
+        rPassword2: ''
     });
 
     const { rName, rEmail, rPassword1, rPassword2 } = formRegisterValues;
@@ -66,7 +66,7 @@ export const LoginScreen = () => {
                                 onChange={ handleLoginInputChange }
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group mt-2">
                             <input
                                 type="password"
                                 className="form-control"
@@ -76,7 +76,7 @@ export const LoginScreen = () => {
                                 onChange={ handleLoginInputChange }
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group mt-4">
                             <input 
                                 type="submit"
                                 className="btnSubmit"
@@ -99,7 +99,7 @@ export const LoginScreen = () => {
                                 onChange={ handleRegisterInputChange }
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group mt-2">
                             <input
                                 type="email"
                                 className="form-control"
@@ -109,7 +109,7 @@ export const LoginScreen = () => {
                                 onChange={ handleRegisterInputChange }
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group mt-2">
                             <input
                                 type="password"
                                 className="form-control"
@@ -120,7 +120,7 @@ export const LoginScreen = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group mt-2">
                             <input
                                 type="password"
                                 className="form-control"
@@ -131,7 +131,7 @@ export const LoginScreen = () => {
                             />
                         </div>
 
-                        <div className="form-group">
+                        <div className="form-group mt-4">
                             <input 
                                 type="submit" 
                                 className="btnSubmit" 

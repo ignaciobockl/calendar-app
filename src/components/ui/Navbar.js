@@ -19,16 +19,16 @@ export const Navbar = () => {
 
   return (
     <div className="navbar navbar-dark bg-dark mb-4">
-        <span className="navbar-brand">
+        <span className="navbar-brand mx-4">
             { name }
         </span>
 
         <button 
-          className='btn btn-outline-danger'
+          className='btn btn-outline-danger mx-4'
           onClick={ handleLogout }
         >
             <i className='fas fa-sign-out-alt' ></i>
-            <span> Salir</span>
+            <span className='mx-1'> Salir</span>
         </button>
     </div>
   )
