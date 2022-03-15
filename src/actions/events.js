@@ -78,7 +78,29 @@ export const eventStartLoading = () => {
     }
 }
 
-export const eventUpdated = ( event ) => ({
+export const eventStartUpdate = ( event ) => {
+    return async( dispatch ) => {
+
+        try {
+            
+            const resp = await fetchWithToken( `event/${ event.id }`, event, 'PUT' );
+            const body = await resp.json();
+
+            if ( body.ok ) {
+                dispatch( eventUpdated( event ) );
+                Swal.fire('Update', `Event "${ event.title }" updated successfully.`, 'success');
+            } else {
+                Swal.fire('Error', body.msg, 'error');
+            }
+
+        } catch (error) {
+            Swal.fire('Error', error, 'error' );
+        }
+
+    }
+}
+
+const eventUpdated = ( event ) => ({
     type: types.eventUpdate,
     payload: event
 });
