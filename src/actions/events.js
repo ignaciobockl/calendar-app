@@ -1,5 +1,8 @@
 import Swal from "sweetalert2";
+
 import { fetchWithToken } from "../helpers/fetch";
+
+import { prepareEvents } from "../helpers/preprareEvents";
 
 import { types } from "../types/types"
 
@@ -7,6 +10,24 @@ import { types } from "../types/types"
 
 const eventAddNew = ( event ) => ({
     type: types.eventAddNew,
+    payload: event
+});
+
+export const eventClearActiveEvent = () => ({
+    type: types.eventClearActiveEvent
+});
+
+export const eventDeleted = () => ({
+    type: types.eventDeleted
+});
+
+const eventLoaded = ( events ) => ({
+    type: types.eventLoaded,
+    payload: events
+});
+
+export const eventSetActive = ( event ) => ({
+    type: types.eventSetActive,
     payload: event
 });
 
@@ -39,18 +60,23 @@ export const eventStartAddNew = ( event ) => {
     }
 }
 
-export const eventClearActiveEvent = () => ({
-    type: types.eventClearActiveEvent
-});
+export const eventStartLoading = () => {
+    return async( dispatch ) => {
 
-export const eventDeleted = () => ({
-    type: types.eventDeleted
-});
+        try {
+            
+            const resp = await fetchWithToken( 'event' );
+            const body = await resp.json();
 
-export const eventSetActive = ( event ) => ({
-    type: types.eventSetActive,
-    payload: event
-});
+            const events = prepareEvents( body.events );
+            dispatch( eventLoaded( events ) );
+
+        } catch (error) {
+            Swal.fire('Error', error, 'error' );
+        }
+
+    }
+}
 
 export const eventUpdated = ( event ) => ({
     type: types.eventUpdate,
