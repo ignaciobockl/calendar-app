@@ -63,15 +63,15 @@ describe('Pruebas en las acciones de auth', () => {
 
     });
 
-    // test('startLogin email incorrecto', async() => {
+    test('startLogin email incorrecto', async() => {
 
-    //     await store.dispatch( startLogin('test1@gmail.com', '132456') );
+        await store.dispatch( startLogin('test1@gmail.com', '132456') );
 
-    //     const actions = store.getActions();
+        const actions = store.getActions();
 
-    //     expect( actions ).toEqual([]);
-    //     expect( Swal.fire ).toHaveBeenCalledWith("Error", "The username and/or password are incorrect.", "error");
+        expect( actions ).toEqual([]);
+        expect( Swal.fire ).toHaveBeenCalledWith("Error", "The username and/or password are incorrect.", "error");
 
-    // });
+    });
 
 });
