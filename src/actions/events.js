@@ -26,6 +26,10 @@ const eventLoaded = ( events ) => ({
     payload: events
 });
 
+export const eventLogout = () => ({
+    type: types.eventLogout
+});
+
 export const eventSetActive = ( event ) => ({
     type: types.eventSetActive,
     payload: event

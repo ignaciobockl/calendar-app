@@ -4,6 +4,8 @@ import { fetchWithoutToken, fetchWithToken } from "../helpers/fetch"
 
 import { types } from "../types/types";
 
+import { eventLogout } from "./events";
+
 
 
 const checkingFinish = () => ({
@@ -70,7 +72,7 @@ export const startLogout = () => {
     return ( dispatch ) => {
 
         localStorage.clear();
-
+        dispatch( eventLogout() );
         dispatch( logout() );
 
     }
