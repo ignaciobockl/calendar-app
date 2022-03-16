@@ -39,6 +39,10 @@ const wrapper = mount(
 
 describe('Pruebas en <LoginScreen />', () => {
 
+    beforeEach(() => {
+        jest.clearAllMocks();
+    });
+
     test('debe de mostrarse correctamente', () => {
 
         expect ( wrapper ).toMatchSnapshot();
@@ -108,6 +112,47 @@ describe('Pruebas en <LoginScreen />', () => {
 
         // sweetalert2 must be called in case the passwords are different
         expect( Swal.fire ).toHaveBeenCalledWith('Error', 'Passwords do not match.', 'error');
+
+    });
+
+    test('Hacer el registro si las contraseñas son iguales', () => {
+
+        wrapper.find('input[name="rName"]').simulate('change', {
+            target: {
+                name: 'rName',
+                value: 'Camii'
+            }
+        });
+
+        wrapper.find('input[name="rEmail"]').simulate('change', {
+            target: {
+                name: 'rEmail',
+                value: 'cami@gmail.com'
+            }
+        });
+
+        wrapper.find('input[name="rPassword1"]').simulate('change', {
+            target: {
+                name: 'rPassword1',
+                value: '123456'
+            }
+        });
+
+        wrapper.find('input[name="rPassword2"]').simulate('change', {
+            target: {
+                name: 'rPassword2',
+                value: '123456'
+            }
+        });
+
+        wrapper.find('form').at(1).prop('onSubmit')({
+            preventDefault(){}
+        });
+
+        expect( Swal.fire ).not.toHaveBeenCalled();
+
+        expect( startRegister ).toHaveBeenCalled();
+        expect( startRegister ).toHaveBeenCalledWith('cami@gmail.com', '123456', 'Camii');
 
     });
 
