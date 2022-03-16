@@ -38,4 +38,25 @@ describe('Pruebas en <AppRouter />', () => {
 
     });
 
+    test('debe de mostrar la ruta publica', () => {
+
+        const initState = {
+            auth: {
+                checking: false,
+                uid: null
+            }
+        };
+        const store = mockStore( initState );
+
+        const wrapper = mount(
+            <Provider store={ store } >
+                <AppRouter />
+            </Provider>
+        );
+
+        expect( wrapper ).toMatchSnapshot();
+        expect( wrapper.find( '.login-container' ).exists() ).toBe( true );
+
+    });
+
 });
