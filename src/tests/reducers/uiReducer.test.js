@@ -1,4 +1,4 @@
-// import { uiReducer } from "../../reducers/uiReducer";
+import { uiReducer } from "../../reducers/uiReducer";
 
 
 const initState = {
@@ -8,13 +8,13 @@ const initState = {
 
 describe('Pruebas en uiReducer', () => {
 
-    // test('debe de retornar el estado por defecto', () => {
+    test('debe de retornar el estado por defecto', () => {
 
-    //     const state = uiReducer( initState, {} );
+        const state = uiReducer( initState, {} );
 
-    //     expect( state ).toEqual( initState );
+        expect( state ).toEqual( initState );
 
-    // });
+    });
 
     // test('debe de abrir y cerrar el modal', () => {
 
