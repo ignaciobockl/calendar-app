@@ -3,7 +3,7 @@ import { authReducer } from "../../reducers/authReducer";
 import { types } from "../../types/types";
 
 
-const initialState = {
+let initialState = {
     checking: true
 }
 
@@ -37,6 +37,22 @@ describe('Pruebas en el authReducer.js', () => {
             uid: '8332',
             name: 'Esmeralda'
         });
+
+    });
+
+    test('debe de hacer el logout correctamente', () => { 
+        
+        initialState = {
+            checking: false,
+            uid: '8332',
+            name: 'Esmeralda'
+        };
+
+        action = { type: types.authLogout };
+
+        const state = authReducer( initialState, action );
+
+        expect( state ).toEqual({ checking: false });
 
     });
 
