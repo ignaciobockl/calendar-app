@@ -20,7 +20,11 @@ const customStyles = {
     },
 };
 
-Modal.setAppElement('#root');
+// you don't have to run it in test mode, since it doesn't work because it's a controlled environment and it won't find the '#root'
+if ( process.env.NODE_ENV !== 'test' ) {
+    // console.log( process.env.NODE_ENV )
+    Modal.setAppElement('#root');
+}
 
 const now = moment().minutes(0).seconds(0).add(1,'hours'); // 3:00:00
 const nowPlus1 = now.clone().add(1, 'hours');
