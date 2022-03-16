@@ -59,4 +59,32 @@ describe('Pruebas en <AppRouter />', () => {
 
     });
 
+    test('debe de mostrar la ruta privada', () => {
+
+        const initState = {
+            auth: {
+                checking: false,
+                uid: '4778',
+                name: 'Mailen'
+            },
+            calendar: {
+                events: [{}]
+            },
+            ui: {
+                modalOpen: false
+            }
+        };
+        const store = mockStore( initState );
+
+        const wrapper = mount(
+            <Provider store={ store } >
+                <AppRouter />
+            </Provider>
+        );
+
+        expect( wrapper ).toMatchSnapshot();
+        expect( wrapper.find( '.calendar-screen' ).exists() ).toBe( true );
+
+    });
+
 });
