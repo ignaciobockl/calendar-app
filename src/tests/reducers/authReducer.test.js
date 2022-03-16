@@ -1,6 +1,6 @@
 import { authReducer } from "../../reducers/authReducer";
 
-// import { types } from "../../types/types";
+import { types } from "../../types/types";
 
 
 const initialState = {
@@ -20,24 +20,24 @@ describe('Pruebas en el authReducer.js', () => {
 
     });
 
-    // test('debe de hacer el login de usuario correctamente', () => {
+    test('debe de hacer el login de usuario correctamente', () => {
 
-    //     action = {
-    //         type: types.authLogin,
-    //         payload: {
-    //             uid: '8332',
-    //             name: 'Esmeralda'
-    //         }
-    //     }
+        action = {
+            type: types.authLogin,
+            payload: {
+                uid: '8332',
+                name: 'Esmeralda'
+            }
+        }
 
-    //     const state = authReducer( initialState, action );
+        const state = authReducer( initialState, action );
         
-    //     expect( state ).toEqual({
-    //         checking: false,
-    //         uid: '8332',
-    //         name: 'Esmeralda'
-    //     });
+        expect( state ).toEqual({
+            checking: false,
+            uid: '8332',
+            name: 'Esmeralda'
+        });
 
-    // });
+    });
 
 });
