@@ -4,9 +4,11 @@ import Swal from 'sweetalert2'
 
 import '@testing-library/jest-dom';
 
-import { startLogin } from '../../actions/auth';
+import { startLogin, startRegister } from '../../actions/auth';
 
 import { types } from '../../types/types';
+
+import * as fetchModule from '../../helpers/fetch';
 
 
 jest.mock( 'sweetalert2', () => ({
@@ -71,6 +73,40 @@ describe('Pruebas en las acciones de auth', () => {
 
         expect( actions ).toEqual([]);
         expect( Swal.fire ).toHaveBeenCalledWith("Error", "The username and/or password are incorrect.", "error");
+
+    });
+
+    test('startRegister correcto', async() => {
+
+        fetchModule.fetchWithoutToken = jest.fn(() => ({
+            json() {
+                return {
+                    ok: true,
+                    user: {
+                        _id: '9428',
+                        name: 'Abru',
+                    },
+                    token: 'AR4533664Q'
+                }
+            }
+        }));
+
+        await store.dispatch( startRegister( 'test2@gmail.com', '132456', 'Test2' ));
+
+        const actions = store.getActions();
+        
+        expect( actions[0] ).toEqual({
+            type: types.authLogin,
+            payload: {
+                uid: '9428',
+                name: 'Abru'
+            }
+        });
+
+        // expect( localStorage.setItem ).toHaveBeenCalledWith('token', expect.any(String));
+        expect( localStorage.setItem ).toHaveBeenCalledWith('token', 'AR4533664Q'); // the same as above but sending the simulated token
+
+        expect( localStorage.setItem ).toHaveBeenCalledWith('token-init-date', expect.any(Number));
 
     });
 
