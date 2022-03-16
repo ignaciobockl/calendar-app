@@ -8,6 +8,14 @@ import '@testing-library/jest-dom';
 
 import { DeleteEventFab } from '../../../components/ui/DeleteEventFab';
 
+import { eventStartDelete } from '../../../actions/events';
+
+
+// mock a la accion eventStartDelete
+jest.mock('../../../actions/events', () => ({
+    eventStartDelete: jest.fn()
+}));
+
 
 const middlewares = [ thunk ];
 const mockStore = configureStore( middlewares );
@@ -28,6 +36,14 @@ describe('Pruebas en <DeleteEventFab />', () => {
     test('debe de mostrarse correctamente', () => {
 
         expect( wrapper ).toMatchSnapshot();
+
+    });
+
+    test('debe de llamar el eventStartDelete al hacer click', () => {
+
+        wrapper.find('button').prop('onClick')();
+        
+        expect( eventStartDelete ).toHaveBeenCalled();
 
     });
 
