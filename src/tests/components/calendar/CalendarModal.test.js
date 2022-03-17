@@ -9,12 +9,14 @@ import '@testing-library/jest-dom';
 
 import { CalendarModal } from '../../../components/calendar/CalendarModal';
 
+import { eventClearActiveEvent, eventStartUpdate } from '../../../actions/events';
 
-// mock a la accion eventSetActive
-// jest.mock('../../../actions/events', () => ({
-//     eventSetActive: jest.fn(),
-//     eventStartLoading: jest.fn()
-// }));
+
+// mock a la accion eventStartUpdate
+jest.mock('../../../actions/events', () => ({
+    eventStartUpdate: jest.fn(),
+    eventClearActiveEvent: jest.fn()
+}));
 
 // localStorage
 // Storage.prototype.setItem = jest.fn();
@@ -63,6 +65,17 @@ describe('Pruebas en <CalendarModal />', () => {
         expect( wrapper.find('.modal').exists() ).toBe( true );
 
         expect( wrapper.find('Modal').prop('isOpen') ).toBe( true );
+
+    });
+
+    test('debe de llamar la accion de actualizar y cerrar el modal', () => {
+
+        wrapper.find('form').simulate('submit', {
+            preventDefault(){}
+        });
+
+        expect( eventStartUpdate ).toHaveBeenCalledWith( initState.calendar.activeEvent );
+        expect( eventClearActiveEvent ).toHaveBeenCalled();
 
     });
 
