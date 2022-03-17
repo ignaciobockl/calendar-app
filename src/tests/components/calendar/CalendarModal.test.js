@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moment from 'moment';
+import { act } from '@testing-library/react';
+import Swal from 'sweetalert2';
 
 import '@testing-library/jest-dom';
 
@@ -17,6 +19,11 @@ jest.mock('../../../actions/events', () => ({
     eventStartUpdate: jest.fn(),
     eventClearActiveEvent: jest.fn(),
     eventStartAddNew: jest.fn()
+}));
+
+// mock sweetalert2
+jest.mock('sweetalert2', () => ({
+    fire: jest.fn()
 }));
 
 // localStorage
@@ -138,6 +145,29 @@ describe('Pruebas en <CalendarModal />', () => {
         });
 
         expect( eventClearActiveEvent ).toHaveBeenCalled();
+
+    });
+
+    test('debe de validar las fechas', () => {
+
+        wrapper.find('input[name="title"]').simulate('change', {
+            target: {
+                name: 'title',
+                value: 'Cumple Lu'
+            }
+        });
+
+        const hoy = new Date();
+
+        act(() => {
+            wrapper.find('DateTimePicker').at(1).prop('onChange')(hoy);
+        });
+
+        wrapper.find('form').simulate('submit', {
+            preventDefault(){}
+        });
+
+        expect( Swal.fire ).toHaveBeenCalledWith('Error', 'La fecha de fin debe de ser mayor a la fecha de inicio', 'error');
 
     });
 
